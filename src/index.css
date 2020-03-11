@@ -16,3 +16,9 @@ code {
   margin: 0 auto;
   width: 600px;
 }
+.rm {
+  background: red;
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+}
