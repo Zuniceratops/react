@@ -1,6 +1,8 @@
-import React from 'react'
-import PropTypse from 'prop-types';
+import React, {useContext} from 'react'
+import PropTypes from 'prop-types'
+import Context from '../context'
 // import TodoItem from './TodoItem'
+
 
 
 const styles = {
@@ -17,25 +19,35 @@ const styles = {
         marginRight: '1rem',
     }
 }
-function TodoItem({todo, index}) {
-    return(
+function TodoItem({todo, index, onChange}) {
+    const { removeTodo } = useContext(Context);
+    const classes = [];
 
+    if(todo.completed) {
+        classes.push('done');
+    }
+    return(
         <li style={styles.li}>
-            <span>
-                <input type="checkbox" style={styles.input}/>
+            <span className={classes.join(' ')}>
+                <input type="checkbox"
+                checked = {todo.completed}
+                style={styles.input}
+                onChange={()=> onChange(todo.id)}
+                />
                 <strong> {index + 1} </strong>
                 &nbsp;
                 {todo.title}
             </span>
-            <button className="rm">&times;</button>
+            <button className="rm" onClick={removeTodo.bind(null, todo.id)}>&times;</button>
         </li>
 
     )
 }
 
-TodoItem.propTypse = {
-    todos: PropTypse.object.isRequired,
-    index: PropTypse.number,
+TodoItem.propTypes = {
+    todos: PropTypes.object.isRequired,
+    index: PropTypes.number,
+    onChange: PropTypes.func.isRequired,
 }
 
 export default TodoItem
