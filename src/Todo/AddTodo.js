@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 function useInputValue(defaultValue = ''){
-    const [value, setValue] = useState('defaultValue')
+    const [value, setValue] = useState('')
 
     return {
         bind: {
@@ -24,14 +24,13 @@ function AddTodo({onCreate}){
         if(input.value().trim()) {
             onCreate(input.value())
             input.clear()
-            // setValue('')
         }
     }
 
     return (
-        <form style={ {marginBottom: '1rem'} } onSubmit={submitHandler}>
+        <form style={ {marginBottom: '1rem', marginTop:'2rem'} } onSubmit={submitHandler}>
             <input {...input.bind}/>
-            <botton type='submit'>Add todo</botton>
+            {/* <botton type='submit' className='addBotton'>Add todo</botton> */}
         </form>
     )   
 }
